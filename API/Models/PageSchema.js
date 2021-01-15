@@ -4,8 +4,8 @@ const PageSchema = new mongoose.Schema({
     page: { type: String, required: true },
     key: { type: String, required: true },
     label: { type: String, required: true },
-    sortable: { type: Boolean, required: true },
-    selected: { type: Boolean, required: true },
+    sortable: { type: Boolean, required: true ,default:false},
+    selected: { type: Boolean, required: true ,default:false},
 }, {
     timestamps: true
 });
