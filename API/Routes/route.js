@@ -5,12 +5,13 @@ const routerEventCode = require('./eventCodeRouter');
 const routerModelDevice = require('./modelDeviceRouter');
 const routerPageChema = require('./pageSchemaRouter');
 const routerRolesAccess = require('./rolesAccessRouter');
+const AuthController = require("../Controllers/AuthController");
 
-
-router.use("/manager",routerManager)
-router.use("/event-code",routerEventCode)
-router.use("/model-device",routerModelDevice)
-router.use("/page-schema",routerPageChema)
-router.use("/roles-access",routerRolesAccess)
+router.post("/login", AuthController.login);
+router.use("/manager", routerManager)
+router.use("/event-code", routerEventCode)
+router.use("/model-device", routerModelDevice)
+router.use("/page-schema", routerPageChema)
+router.use("/roles-access", routerRolesAccess)
 
 module.exports = router

@@ -1,9 +1,9 @@
 const Model_Device = require('../Models/Model_Device');
+const Roles_Access = require('../Models/Roles_Access');
 const mongoose = require('mongoose')
 
 exports.index = async (req, res, next) => {
     try {
-
         await Model_Device.find()
             .then(data => res.status(200).json(data))
             .catch(next);
