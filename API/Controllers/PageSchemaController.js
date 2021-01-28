@@ -43,7 +43,7 @@ exports.update = async (req, res, next) => {
     try {
         let del = await Page_Schema.findById(id)
         if (!del) { return res.status(404).json({ err: 'id is not exits' }) }
-        let edit = { 'page': page_schema_data.page ? page_schema_data.page : del.page, 'key': page_schema_data.key ? page_schema_data.key : del.key, 'label': page_schema_data.label ? page_schema_data.label : del.label, 'sortable': page_schema_data.sortable ? page_schema_data : del.sortable, 'selected': page_schema_data.selected ? page_schema_data.selected : del.selected }
+        let edit = { 'page': page_schema_data.page ? page_schema_data.page : del.page, 'key': page_schema_data.key ? page_schema_data.key : del.key, 'label': page_schema_data.label ? page_schema_data.label : del.label, 'sortable': page_schema_data.sortable , 'selected': page_schema_data.selected  }
         let result = await Page_Schema.updateOne({ _id: id }, { $set: edit })
         return result.ok > 0 ? res.status(200).json({ mes: 'successfully' }) : res.status(304).json({ mes: 'fail' })
     } catch (error) {

@@ -49,20 +49,13 @@ exports.create = async (req, res, next) => {
 exports.update = async (req, res, next) => {
     const id = req.params.id
     let manager_data = req.body
-    if (!validateInfoManager(manager_data)) {
-        return res.status(409).json({
-            error: {
-                message: 'Invalid credentials'
-            }
-        })
-    }
     const salt = await bcrypt.genSalt(10)
     const passwordHash = await bcrypt.hash(manager_data.password, salt)
     manager_data.password = passwordHash
     try {
         let del = await Manager.findById(id)
         if (!del) { return res.status(404).json({ err: 'id is not exits' }) }
-        let edit = { 'password': manager_data.password ? manager_data.password : del.password, 'full_name': manager_data.full_name ? manager_data.full_name : del.full_name, 'id_roles_access': manager_data.id_roles_access ? manager_data.id_roles_access : del.id_roles_access }
+        let edit = { 'password': manager_data.password ? manager_data.password : del.password, 'full_name': manager_data.full_name ? manager_data.full_name : del.full_name, 'is_login': manager_data.is_login }
         let result = await Manager.updateOne({ _id: id }, { $set: edit })
         return result.ok > 0 ? res.status(200).json({ mes: 'successfully,but you can not update username' }) : res.status(304).json({ mes: 'fail' })
     } catch (error) {
